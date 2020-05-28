@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace BolaEstateApp
+namespace BolaEstateApp.Web
 {
     public class Program
     {
