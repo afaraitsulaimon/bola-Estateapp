@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using BolaEstateApp.Models;
+using BolaEstateApp.Web.Models;
 
-namespace BolaEstateApp.Controllers
+namespace BolaEstateApp.Web.Controllers
 {
     public class HomeController : Controller
     {

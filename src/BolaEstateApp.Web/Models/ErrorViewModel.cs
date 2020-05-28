@@ -1,6 +1,6 @@
 using System;
 
-namespace BolaEstateApp.Models
+namespace BolaEstateApp.Web.Models
 {
     public class ErrorViewModel
     {
