@@ -3,9 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BolaEstateApp.Data.DatabaseContexts.AuthenticationDbContext;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using BolaEstateApp.Data.DatabaseContexts.AuthenticationDbContext;
+using BolaEstateApp.Data.DatabaseContexts.ApplicationDbContext;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -32,6 +33,9 @@ namespace BolaEstateApp.Web
                //and we just used it , to say, when creating the database migration for the AuthenticationDbContext, create it inside BolaEstateApp.Data
               // which is sqlServerOptions => {
                   // sqlServerOptions.MigrationsAssembly("BolaEstateApp.Data");
+                  //Configuration.GetConnectionString("AuthenticationConnection") this is connect it to  the database in the appsettings.json
+                  //this AuthenticationConnection is the name of the connection created in the appsettings.json for user authentication,so inside the bracket
+                  //here Configuration.GetConnectionString("AuthenticationConnection"),it has to tally with the name in the connection inside the appsettings.json file
 
 
             services.AddDbContextPool<AuthenticationDbContext>(
@@ -44,20 +48,33 @@ namespace BolaEstateApp.Web
                 ));
 
 
-               
-               //in here , we want to make sure all our database are in the BolaEstateApp.Data folder
+
+            
+                //in here , we want to make sure all our database are in the BolaEstateApp.Data folder
                //this services.AddDbContextPool<ApplicationDbContext> , says add a DbContext called the ApplicationDbContext
                //the sqlServerOptions is vey powerful
                //and we just used it , to say, when creating the database migration for ApplicationDbContext, create it inside BolaEstateApp.Data
               // which is sqlServerOptions => {
                   // sqlServerOptions.MigrationsAssembly("BolaEstateApp.Data");
+                  //Configuration.GetConnectionString("ApplicationConnection") this is connect it to  the database in the appsettings.json,so inside the bracket
+                  //here Configuration.GetConnectionString("ApplicationConnection"),it has to tally with the name in the connection inside the appsettings.json file
 
-               services.AddDbContextPool<ApplicationDbContext>(Options =>
-                Options.UseSqlServer(Configuration.GetConnectionString("ApplicationConnection"),
+                  //this ApplicationConnection is the name of the connection created in the appsettings.json for our Application
+
+
+               
+
+               
+               services.AddDbContextPool<ApplicationDbContext>(
+                   options => options.UseSqlServer(Configuration.GetConnectionString("ApplicationConnection"),
 
                sqlServerOptions => {
+
                    sqlServerOptions.MigrationsAssembly("BolaEstateApp.Data");
-               }));
+               }
+               
+               
+               ));
 
 
 
