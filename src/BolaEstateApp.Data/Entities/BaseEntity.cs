@@ -1,3 +1,7 @@
+using System;
+
+
+
 namespace BolaEstateApp.Data.Entities
 {
 
