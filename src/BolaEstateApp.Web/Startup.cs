@@ -17,6 +17,8 @@ using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using BolaEstateApp.Web.Services;
+using BolaEstateApp.Web.Interfaces;
 
 namespace BolaEstateApp.Web {
     public class Startup {
@@ -100,7 +102,8 @@ namespace BolaEstateApp.Web {
                 options.SignIn.RequireConfirmedPhoneNumber = false;
             });
 
-            services.AddControllersWithViews ();
+            services.AddControllersWithViews();
+            services.AddTransient<IAccountsService, AccountsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -116,7 +119,7 @@ namespace BolaEstateApp.Web {
             app.UseStaticFiles ();
 
             app.UseRouting ();
-
+            app.UseAuthentication();
             app.UseAuthorization ();
 
             app.UseEndpoints (endpoints => {
